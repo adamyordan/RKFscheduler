@@ -48,7 +48,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <a class="navbar-brand" href="{{route('home')}}">RKF</a>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right visible-md">
           <li><a href="#timeline">Timeline</a></li>
           @foreach (Scheduler\Division::all() as $division)
             <li><a href="#{{$division->shortname}}">{{$division->shortname}}</a></li>

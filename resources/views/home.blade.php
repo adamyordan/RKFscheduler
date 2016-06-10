@@ -65,36 +65,38 @@
 <div class="row vdivide">
 
   <div class="col-md-3">
-    <center><div id="deadline-datepicker"></div></center>
-    <hr>
-    <h4>Tambah Proker</h4>
-    <form id="proker-form">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <label for="">Divisi</label>
-            <div id="division_select_container"></div>
-          </div>
-          <div class="form-group">
-            <label for="">Nama Proker</label>
-            <input type="text" class="form-control" placeholder="Nama proker" name="name"/>
-          </div>
-          <div class="form-group">
-            <label for="">Deskripsi Proker</label>
-            <input type="text" class="form-control" placeholder="Deskripsi proker" name="description"/>
-          </div>              
-          <div class="form-group">
-            <label for="">Tanggal Pelaksanaan</label>
-            <div class="input-daterange input-group" id="datepicker">
-                <input type="text" class="input-sm form-control" name="startDate"/>
-                <span class="input-group-addon">to</span>
-                <input type="text" class="input-sm form-control" name="endDate"/>
+    <div id="new" class="visible-md">
+      <center><div id="deadline-datepicker"></div></center>
+      <hr>
+      <h4>Tambah Proker</h4>
+      <form id="proker-form">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="">Divisi</label>
+              <div id="division_select_container"></div>
             </div>
+            <div class="form-group">
+              <label for="">Nama Proker</label>
+              <input type="text" class="form-control" placeholder="Nama proker" name="name"/>
+            </div>
+            <div class="form-group">
+              <label for="">Deskripsi Proker</label>
+              <input type="text" class="form-control" placeholder="Deskripsi proker" name="description"/>
+            </div>              
+            <div class="form-group">
+              <label for="">Tanggal Pelaksanaan</label>
+              <div class="input-daterange input-group" id="datepicker">
+                  <input type="text" class="input-sm form-control" name="startDate"/>
+                  <span class="input-group-addon">to</span>
+                  <input type="text" class="input-sm form-control" name="endDate"/>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-default btn-block">Tambah</button>              
           </div>
-          <button type="submit" class="btn btn-default btn-block">Tambah</button>              
         </div>
-      </div>
-    </form>
+      </form>      
+    </div>
   </div>
 
   <div class="col-md-9">
@@ -110,39 +112,41 @@
           {{$division->name}}
         </h4>
         @if ($division->prokers->count() != 0)
-          <table class="table table-condensed">
-            <thead>
-              <tr>
-                <th width="20%">Proker</th>
-                <th width="40%">Deskripsi</th>
-                <th width="20%">Pelaksanaan</th>
-                <th width="20%"></th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($division->prokers->sortBy('start_date') as $proker)
-                <tr id="row-{{$proker->id}}">
-                  <td>{{$proker->name}}</td>
-                  <td>{{$proker->description}}</td>
-                  <td>
-                    {{
-                      $proker->start_date == $proker->end_date
-                      ? Carbon\Carbon::parse($proker->start_date)->format('M j')
-                      : Carbon\Carbon::parse($proker->start_date)->format('M j') . ' - ' 
-                        . Carbon\Carbon::parse($proker->end_date)->format('M j')
-                    }}
-                  </td>
-                  <td>
-                    <div class="btn-group btn-group-xs">
-                      <button class="btn btn-link" onclick="fillData({{$proker->id}})">Edit</button>
-                      <button class="btn btn-link" onclick="deleteRow({{$proker->id}})">Delete</button>
-                      <button class="btn btn-link" onclick="focusTimeline({{$proker->id}})">Highlight</button>                      
-                    </div>
-                  </td>
+          <div class="table-responsive">
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th width="20%">Proker</th>
+                  <th width="40%">Deskripsi</th>
+                  <th width="20%">Pelaksanaan</th>
+                  <th width="20%"></th>
                 </tr>
-              @endforeach
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                @foreach ($division->prokers->sortBy('start_date') as $proker)
+                  <tr id="row-{{$proker->id}}">
+                    <td>{{$proker->name}}</td>
+                    <td>{{$proker->description}}</td>
+                    <td>
+                      {{
+                        $proker->start_date == $proker->end_date
+                        ? Carbon\Carbon::parse($proker->start_date)->format('M j')
+                        : Carbon\Carbon::parse($proker->start_date)->format('M j') . ' - ' 
+                          . Carbon\Carbon::parse($proker->end_date)->format('M j')
+                      }}
+                    </td>
+                    <td>
+                      <div class="btn-group btn-group-xs visible-md">
+                        <button class="btn btn-link" onclick="fillData({{$proker->id}})">Edit</button>
+                        <button class="btn btn-link" onclick="deleteRow({{$proker->id}})">Delete</button>
+                        <button class="btn btn-link" onclick="focusTimeline({{$proker->id}})">Highlight</button>                      
+                      </div>
+                    </td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
         @else
           <p>Tidak ada proker</p>
         @endif
@@ -352,11 +356,25 @@
       $('body, html').animate({scrollTop: pos});
   });
 
+  $('#new').affix({
+    offset: {
+        top: $('#new').offset().top + 500
+    }
+  });
+
+
 </script>
 
 <style>
 .vis-item .vis-item-overflow {
   overflow: visible;
-}</style>
+}
+
+.affix {
+  top: 40px;
+  width: 263px;
+}
+
+</style>
 
 @endsection
