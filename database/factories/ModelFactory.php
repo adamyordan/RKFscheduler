@@ -11,8 +11,15 @@
 |
 */
 
-$factory->define(App\Task::class, function (Faker\Generator $faker) {
+// $factory->define(Scheduler\Task::class, function (Faker\Generator $faker) {
+//     return [
+//         'name' => $faker->title,
+//     ];
+// });
+
+$factory->define(Scheduler\Division::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->title,
+        'name' => $faker->company,
+        'description' => $faker->text,
     ];
 });

@@ -1,0 +1,1 @@
+{"virtualbox":{"/home/vagrant/scheduler":{"type":null,"mount_options":[],"guestpath":"/home/vagrant/scheduler","hostpath":"/home/adam/projects/web/rkf/scheduler","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/adam/projects/web/rkf/scheduler","disabled":false,"__vagrantfile":true}}}

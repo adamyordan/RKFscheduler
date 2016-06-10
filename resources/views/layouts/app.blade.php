@@ -1,49 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel Quickstart - Basic</title>
+    <title>Scheduler</title>
 
-    <!-- Fonts -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">  
+    <link rel="stylesheet" href="https://bootswatch.com/simplex/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/3.3.4/sweetalert2.min.css">
 
-    <!-- Styles -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+    <!-- React -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.6.2/remarkable.min.js"></script>
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js"></script>    
+    <script src="https://cdn.jsdelivr.net/sweetalert2/3.3.4/sweetalert2.min.js"></script>
 
     <style>
-        body {
-            font-family: 'Lato';
-        }
-
-        .fa-btn {
-            margin-right: 6px;
-        }
+      .row.vdivide [class*='col-']:not(:last-child):after {
+        background: #e0e0e0;
+        width: 1px;
+        content: "";
+        display:block;
+        position: absolute;
+        top:0;
+        bottom: 0;
+        right: 0;
+        min-height: 70px;
+      }
     </style>
-</head>
-<body id="app-layout">
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
 
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Task List
-                </a>
-            </div>
+  </head>
+  <body>
 
-        </div>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="{{route('home')}}">RKF</a>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#timeline">Timeline</a></li>
+          @foreach (Scheduler\Division::all() as $division)
+            <li><a href="#{{$division->shortname}}">{{$division->shortname}}</a></li>
+          @endforeach
+        </ul>
+      </div>
     </nav>
 
-    @yield('content')
+    <br><br><br>
 
-    <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
-</body>
+    <div class="container" id="main">
+        @yield('content')
+    </div>
+
+  </body>
 </html>

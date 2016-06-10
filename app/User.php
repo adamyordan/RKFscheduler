@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Scheduler;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 

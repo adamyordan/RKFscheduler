@@ -1,3 +1,3 @@
-# Laravel Quickstart - Basic
+# Scheduler
 
-http://laravel.com/docs/quickstart
+Scheduler for Events

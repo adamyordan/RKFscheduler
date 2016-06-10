@@ -151,10 +151,12 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Scheduler\Providers\AppServiceProvider::class,
+        Scheduler\Providers\AuthServiceProvider::class,
+        Scheduler\Providers\EventServiceProvider::class,
+        Scheduler\Providers\RouteServiceProvider::class,
+
+        Barryvdh\Cors\ServiceProvider::class,
 
     ],
 

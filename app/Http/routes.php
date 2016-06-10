@@ -11,46 +11,35 @@
 |
 */
 
-use App\Task;
+use Scheduler\Task;
 use Illuminate\Http\Request;
 
-Route::group(['middleware' => ['web']], function () {
-    /**
-     * Show Task Dashboard
-     */
-    Route::get('/', function () {
-        return view('tasks', [
-            'tasks' => Task::orderBy('created_at', 'asc')->get()
-        ]);
-    });
+Route::group(['middleware' => ['web', 'cors']], function () {
 
-    /**
-     * Add New Task
-     */
-    Route::post('/task', function (Request $request) {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|max:255',
-        ]);
+    Route::get('/', ['as' => 'home', function () {
+      return view('home');
+    }]);
 
-        if ($validator->fails()) {
-            return redirect('/')
-                ->withInput()
-                ->withErrors($validator);
-        }
+    Route::get('new', ['as' => 'new', function () {
+      return view('create');
+    }]);
 
-        $task = new Task;
-        $task->name = $request->name;
-        $task->save();
+});
 
-        return redirect('/');
-    });
+Route::group(['prefix' => 'api'], function () {
 
-    /**
-     * Delete Task
-     */
-    Route::delete('/task/{id}', function ($id) {
-        Task::findOrFail($id)->delete();
+  Route::resource('division', 'DivisionController', ['only' => [
+    'index', 'show'
+  ]]);
 
-        return redirect('/');
-    });
+  Route::resource('proker', 'ProkerController', ['only' => [
+    'index', 'show', 'store', 'destroy', 'update'
+  ]]);
+
+  Route::get('division/{id}/proker', ['as' => 'division.proker', 
+    'uses' => 'DivisionController@proker']
+  );
+
+  Route::get('timeline', ['as' => 'timeline', 'uses' => 'ProkerController@timeline']);
+
 });
