@@ -65,7 +65,7 @@
 <div class="row vdivide">
 
   <div class="col-md-3">
-    <div id="new" class="visible-md">
+    <div id="new" class="hidden-xs">
       <center><div id="deadline-datepicker"></div></center>
       <hr>
       <h4>Tambah Proker</h4>
@@ -136,7 +136,7 @@
                       }}
                     </td>
                     <td>
-                      <div class="btn-group btn-group-xs visible-md">
+                      <div class="btn-group btn-group-xs hidden-xs">
                         <button class="btn btn-link" onclick="fillData({{$proker->id}})">Edit</button>
                         <button class="btn btn-link" onclick="deleteRow({{$proker->id}})">Delete</button>
                         <button class="btn btn-link" onclick="focusTimeline({{$proker->id}})">Highlight</button>                      
