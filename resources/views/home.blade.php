@@ -12,7 +12,7 @@
   function fillData(id) {
     $('#myModal').modal('show');
 
-    $.get('{{url("/api/proker/")}}' + id, function(data) {
+    $.get('{{url("/api/proker")}}/' + id, function(data) {
       $('input[name="editid"]').val(data.id);
       $('input[name="editdivision"]').val(data.division);
       $('input[name="editname"]').val(data.name);
@@ -34,7 +34,7 @@
     }).then(function(password) {
       if (password) {
         $.ajax({
-          url: '{{url("/api/proker/")}}' + id,
+          url: '{{url("/api/proker")}}/' + id,
           type: 'DELETE',
           data: {password: password},
           success: function(data) {
@@ -293,7 +293,7 @@
     }).then(function(password) {
       if (password) {
         $.ajax({
-          url: '{{url("/api/proker/")}}' + $('input[name="editid"]').val(),
+          url: '{{url("/api/proker")}}/' + $('input[name="editid"]').val(),
           type: 'PUT',
           data: {
             password: password,
