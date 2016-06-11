@@ -12,7 +12,7 @@
   function fillData(id) {
     $('#myModal').modal('show');
 
-    $.get('/api/proker/' + id, function(data) {
+    $.get('{{url("/api/proker/")}}' + id, function(data) {
       $('input[name="editid"]').val(data.id);
       $('input[name="editdivision"]').val(data.division);
       $('input[name="editname"]').val(data.name);
@@ -34,7 +34,7 @@
     }).then(function(password) {
       if (password) {
         $.ajax({
-          url: '/api/proker/' + id,
+          url: '{{url("/api/proker/")}}' + id,
           type: 'DELETE',
           data: {password: password},
           success: function(data) {
@@ -212,7 +212,7 @@
     },
 
     componentDidMount: function() {
-      this.serverRequest = $.get('/api/division', function (result) {
+      this.serverRequest = $.get('{{route('api.division.index')}}', function (result) {
         this.setState({data: result, chosenDivision: this.state.chosenDivision});
       }.bind(this));
     },
@@ -260,7 +260,7 @@
       showCancelButton: true,
     }).then(function(password) {
       if (password) {
-        $.post('/api/proker', {
+        $.post('{{route("api.proker.store")}}', {
             name : $('input[name=name]').val(),
             description : $('input[name=description]').val(),
             startDate : moment($('input[name=startDate]').val()).format('YYYY-MM-DD'),
@@ -293,7 +293,7 @@
     }).then(function(password) {
       if (password) {
         $.ajax({
-          url: '/api/proker/' + $('input[name="editid"]').val(),
+          url: '{{url("/api/proker/")}}' + $('input[name="editid"]').val(),
           type: 'PUT',
           data: {
             password: password,
