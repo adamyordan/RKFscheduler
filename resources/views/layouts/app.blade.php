@@ -45,16 +45,29 @@
   </head>
   <body>
 
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="{{route('home')}}">RKF</a>
-        <ul class="nav navbar-nav navbar-right hidden-xs">
-          <li><a href="#timeline">Timeline</a></li>
-          @foreach (Scheduler\Division::all() as $division)
-            <li><a href="#{{$division->shortname}}">{{$division->shortname}}</a></li>
-          @endforeach
-        </ul>
-      </div>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+       <div class="container" id="navfluid">
+           <div class="navbar-header">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationbar">
+                   <span class="sr-only">Toggle navigation</span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                </button>
+              <a class="navbar-brand" href="{{route('home')}}">RKF</a>
+           </div>
+           <div class="collapse navbar-collapse" id="navigationbar">
+              <ul class="nav navbar-nav navbar-left">
+                <li><a href="{{route('excel')}}">Get Excel</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#timeline">Timeline</a></li>
+                @foreach (Scheduler\Division::all() as $division)
+                  <li><a href="#{{$division->shortname}}">{{$division->shortname}}</a></li>
+                @endforeach
+              </ul>
+          </div>
+       </div>
     </nav>
 
     <br><br><br>

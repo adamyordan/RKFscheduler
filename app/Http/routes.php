@@ -24,6 +24,8 @@ Route::group(['middleware' => ['web', 'cors']], function () {
       return view('create');
     }]);
 
+    Route::get('excel', ['as' => 'excel', 'uses' => 'ExcelController@export']);
+
 });
 
 Route::group(['prefix' => 'api'], function () {
