@@ -103,22 +103,24 @@
     
     @foreach (Scheduler\Division::all() as $division)
       <div class="panel panel-default panel-body" id="{{$division->shortname}}">        
-        <h4 data-toggle="tooltip" data-placement="left" 
+        <h4>
+          <span data-toggle="tooltip" data-placement="top" 
           title="
             @foreach($division->members as $m) 
               {{$m->name}} <br>
             @endforeach
           ">
-          {{$division->name}}
+            {{$division->name}}            
+          </span>
         </h4>
         @if ($division->prokers->count() != 0)
           <div class="table-responsive">
             <table class="table table-condensed">
               <thead>
                 <tr>
-                  <th width="20%">Proker</th>
-                  <th width="40%">Deskripsi</th>
-                  <th width="20%">Pelaksanaan</th>
+                  <th width="25%">Proker</th>
+                  <th width="15%">Pelaksanaan</th>
+                  <th width="30%">Deskripsi</th>
                   <th width="20%"></th>
                 </tr>
               </thead>
@@ -126,7 +128,6 @@
                 @foreach ($division->prokers->sortBy('start_date') as $proker)
                   <tr id="row-{{$proker->id}}">
                     <td>{{$proker->name}}</td>
-                    <td>{{$proker->description}}</td>
                     <td>
                       {{
                         $proker->start_date == $proker->end_date
@@ -135,6 +136,7 @@
                           . Carbon\Carbon::parse($proker->end_date)->format('M j')
                       }}
                     </td>
+                    <td>{{$proker->description}}</td>
                     <td>
                       <div class="btn-group btn-group-xs hidden-xs">
                         <button class="btn btn-link" onclick="fillData({{$proker->id}})">Edit</button>
@@ -315,7 +317,7 @@
     });
   });
 
-  $('.input-daterange').datepicker();
+  $('.input-daterange').datepicker({todayHighlight: true});
   $('#deadline-datepicker').datepicker({todayHighlight: true});
 
   var container = document.getElementById('timeline');
