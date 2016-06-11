@@ -112,7 +112,7 @@ class ExcelController extends Controller
           $sheet->row($i++, $data);
 
           $mondaysJ = [];
-          $j = 2;
+          $j = 3;
           $data = ['Bidang', 'Bidang'];
           $dayname = ['Mo', 'Su', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
           $dayctr = 3;
@@ -180,7 +180,7 @@ class ExcelController extends Controller
 
                   if (in_array($j, $mondaysJ)) {
                     $sheet->cell($col[$j]. $i, function($cell) {
-                      $sundayColor    = '#2196F3';
+                      $sundayColor    = '#B3E5FC';
                       $cell->setBackground($sundayColor);
                     });                    
                   }
@@ -192,7 +192,7 @@ class ExcelController extends Controller
                   }
                   if (in_array($j, $phpJ)) {
                     $sheet->cell($col[$j]. $i, function($cell) {
-                      $phpColor       = '#607D8B';
+                      $phpColor       = '#B2DFDB';
                       $cell->setBackground($phpColor);
                     });                    
                   }
