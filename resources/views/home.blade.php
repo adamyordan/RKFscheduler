@@ -65,9 +65,9 @@
 <div class="row vdivide">
 
   <div class="col-md-3">
-    <div id="new" class="hidden-xs">
-      <center><div id="deadline-datepicker"></div></center>
-      <hr>
+    <div id="new">
+      <center><div id="deadline-datepicker" class="hidden-xs"></div></center>
+      <hr class="hidden-xs">
       <h4>Tambah Proker</h4>
       <form id="proker-form">
         <div class="row">
@@ -93,6 +93,7 @@
               </div>
             </div>
             <button type="submit" class="btn btn-default btn-block">Tambah</button>              
+            <hr>
           </div>
         </div>
       </form>      
@@ -358,12 +359,14 @@
       $('body, html').animate({scrollTop: pos});
   });
 
-  $('#new').affix({
-    offset: {
-        top: $('#new').offset().top + 500
-    }
-  });
 
+  if($(window).width() > 1024){
+    $('#new').affix({
+      offset: {
+          top: $('#new').offset().top + 500
+      }
+    });
+  }
 
 </script>
 
