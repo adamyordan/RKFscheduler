@@ -71,13 +71,13 @@ class ExcelController extends Controller
           }
           array_push($months, $mon);
 
-          $mon = new stdClass();
-          $mon->name = "November";
-          $mon->days = [];
-          for ($d = 1; $d <= 30; $d++){
-            array_push($mon->days, $d);
-          }
-          array_push($months, $mon);
+          // $mon = new stdClass();
+          // $mon->name = "November";
+          // $mon->days = [];
+          // for ($d = 1; $d <= 30; $d++){
+          //   array_push($mon->days, $d);
+          // }
+          // array_push($months, $mon);
 
 
           $col = [];
@@ -101,7 +101,7 @@ class ExcelController extends Controller
           $sheet->mergeCells("BL1:CP1");
           $sheet->mergeCells("CQ1:DT1");
           $sheet->mergeCells("DU1:EY1");
-          $sheet->mergeCells("EZ1:GC1");
+          // $sheet->mergeCells("EZ1:GC1");
 
           $data = ['', ''];
           foreach($months as $mon) {
@@ -143,14 +143,14 @@ class ExcelController extends Controller
 
           foreach (Division::all() as $division) {
             $sheet->mergeCells("A$i:B$i");
-            $sheet->cells("A$i:GC$i", function($cells) {
+            $sheet->cells("A$i:EY$i", function($cells) {
               $divisionColor  = '#009688';
               $cells->setBackground($divisionColor);
             });
             $sheet->row($i++, [$division->name]);
             $ctr = 1;
 
-            foreach ($division->prokers as $proker) {
+            foreach ($division->prokers->sortBy('start_date') as $proker) {
 
               $data = [$ctr++, $proker->name];             
 
@@ -227,11 +227,11 @@ class ExcelController extends Controller
           }
 
 
-          $sheet->cells('A1:GC' . $i, function($cells) {
+          $sheet->cells('A1:EY' . $i, function($cells) {
             $cells->setAlignment('center');
           });
 
-          $sheet->cells('A1:GC3', function($cells) {
+          $sheet->cells('A1:EY3', function($cells) {
             $cells->setBackground('#4CAF50');
             $cells->setFontColor('#ffffff');
           });
@@ -275,7 +275,7 @@ class ExcelController extends Controller
             $sheet->row($i++, ['#', 'Proker', 'Tgl Mulai', 'Tgl Selesai', 'Deskripsi']);
 
             $j = 1;
-            foreach ($division->prokers as $proker) {
+            foreach ($division->prokers->sortBy('start_date') as $proker) {
               $sheet->row($i++, [$j++, $proker->name, $proker->start_date, $proker->end_date, $proker->description]);
             }
 
