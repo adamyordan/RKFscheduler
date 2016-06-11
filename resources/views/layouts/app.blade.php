@@ -40,6 +40,11 @@
         right: 0;
         min-height: 70px;
       }
+
+      .btn-group {
+        display: flex;
+      }
+
     </style>
 
   </head>
