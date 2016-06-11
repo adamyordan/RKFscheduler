@@ -212,7 +212,7 @@
     },
 
     componentDidMount: function() {
-      this.serverRequest = $.get('/api/division/', function (result) {
+      this.serverRequest = $.get('/api/division', function (result) {
         this.setState({data: result, chosenDivision: this.state.chosenDivision});
       }.bind(this));
     },
