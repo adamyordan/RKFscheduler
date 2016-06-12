@@ -63,7 +63,7 @@
            </div>
            <div class="collapse navbar-collapse" id="navigationbar">
               <ul class="nav navbar-nav navbar-left">
-                <li><a href="{{route('excel')}}">Get Excel</a></li>
+                <li><a href="{{route('excel')}}">Export to Excel</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="#timeline">Timeline</a></li>
