@@ -99,8 +99,8 @@ class ProkerController extends Controller
         $proker = Proker::find($id);
         $proker->name = $request->name;
         $proker->description = $request->description;
-        $proker->start_date = Carbon::parse($request->startDate)->addDay()->format('Y-m-d');
-        $proker->end_date = Carbon::parse($request->endDate)->addDay()->format('Y-m-d');
+        $proker->start_date = Carbon::parse($request->startDate)->format('Y-m-d');
+        $proker->end_date = Carbon::parse($request->endDate)->format('Y-m-d');
         $proker->done = $request->done;
         $proker->save();
 
